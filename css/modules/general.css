@@ -7,9 +7,26 @@
   display: flex;
 }
 
+.slide-list:hover {
+  will-change: transform;
+}
+
 .slide-list li {
   width: 80vw;
   max-width: 800px;
   flex-shrink: 0;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  filter: blur(2px);
   margin: 0 20px;
+  opacity: 0.9;
+  transform: scale(0.9);
+  transition: 0.3s;
+}
+
+.slide-list li.active {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
 }
