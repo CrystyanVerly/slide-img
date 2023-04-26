@@ -9,6 +9,10 @@ export default class Slide {
     };
   }
 
+  slideTransition(active) {
+    this.slide.style.transition = active ? "transform .3s" : "";
+  }
+
   moveSlide(distX) {
     this.distance.movePosition = distX;
     this.slide.style.transform = `translate3d(${distX}px, 0px, 0px)`;
@@ -30,6 +34,8 @@ export default class Slide {
       moveType = "touchmove";
     }
     this.wrapper.addEventListener(moveType, this.onMove);
+
+    this.slideTransition(false);
   }
 
   onMove(event) {
@@ -46,6 +52,19 @@ export default class Slide {
     event.preventDefault();
     this.wrapper.removeEventListener(moveType, this.onMove);
     this.distance.finalPosition = this.distance.movePosition;
+
+    this.slideTransition(true);
+    this.changeSlideOnEnd();
+  }
+
+  changeSlideOnEnd() {
+    if (this.distance.movement > 120 && this.index.next !== undefined) {
+      this.activeNextSlide();
+    } else if (this.distance.movement < -120 && this.index.prev !== undefined) {
+      this.activePrevSlide();
+    } else {
+      this.changeSlide(this.index.active);
+    }
   }
 
   addEventSlide() {
@@ -80,23 +99,37 @@ export default class Slide {
   }
 
   slidesIndexNav(index) {
-    const last = this.arrSlide.length - 1;
+    const lastSlide = this.arrSlide.length - 1;
     this.index = {
       prev: index ? index - 1 : undefined,
       active: index,
-      next: index === last ? undefined : index + 1,
+      next: index === lastSlide ? undefined : index + 1,
     };
   }
 
-  changeSlide() {
+  changeSlide(index) {
     const activeSlide = this.arrSlide[index];
     this.moveSlide(activeSlide.positionSlide);
     this.slidesIndexNav(index);
     this.distance.finalPosition = activeSlide.positionSlide;
   }
 
+  // navigation
+  activePrevSlide() {
+    if (this.index.prev !== undefined) {
+      this.changeSlide(this.index.prev);
+    }
+  }
+
+  activeNextSlide() {
+    if (this.index.next !== undefined) {
+      this.changeSlide(this.index.next);
+    }
+  }
+
   init() {
     this.bindEvents();
+    this.slideTransition(true);
     this.addEventSlide();
     this.slidesConfig();
     return this;
