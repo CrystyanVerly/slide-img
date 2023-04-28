@@ -1,6 +1,7 @@
 .slide-wrapper {
   display: flex;
   overflow: hidden;
+  position: relative;
 }
 
 .slide-list {
@@ -29,4 +30,11 @@
   opacity: 1;
   transform: scale(1);
   filter: blur(0);
+}
+
+.arrow-nav {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  position: absolute;
 }
