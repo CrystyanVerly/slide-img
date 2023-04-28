@@ -168,7 +168,7 @@ export class Slide {
   }
 }
 
-export class SlideNav extends Slide {
+export default class SlideNav extends Slide {
   constructor(wrapper, slide) {
     super(wrapper, slide);
     this.bindEventsPaging();
@@ -190,7 +190,7 @@ export class SlideNav extends Slide {
     control.classList.add("tab-slide-nav");
 
     this.arrSlide.forEach((item, index) => {
-      control.innerHTML += `<li><a href='#slide${index + 1}'></li>`;
+      control.innerHTML += `<li><a href='#slide${index + 1}'></a></li>`;
     });
     this.wrapper.appendChild(control);
     return control;
