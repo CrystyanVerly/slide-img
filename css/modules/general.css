@@ -1,7 +1,7 @@
 .slide-wrapper {
-  display: flex;
+  display: grid;
   align-items: center;
-  overflow: hidden;
+  overflow-x: clip;
   position: relative;
 }
 
@@ -50,6 +50,7 @@
   background: rgba(0, 0, 0, 0.35);
   border: none;
   transition: 0.3s;
+  cursor: pointer;
 }
 
 .prev-slide:hover,
@@ -60,4 +61,31 @@
 .material-symbols-outlined {
   color: #d0d0d0;
   font-size: 2rem;
+}
+
+.tab-slide-nav {
+  display: flex;
+  justify-content: space-between;
+  justify-self: center;
+  gap: 1rem;
+  top: -3.2rem;
+  position: absolute;
+}
+
+.tab-slide-nav a {
+  display: block;
+  width: 40px;
+  height: 40px;
+  background: #fb5;
+  border-radius: 50%;
+  margin: 5px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  transition: 0.4s;
+}
+
+.tab-slide-nav li.active a,
+.tab-slide-nav li a:hover {
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
